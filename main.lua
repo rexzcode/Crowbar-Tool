@@ -171,7 +171,7 @@ local function ghostModels()
         }
 
         for _, descendant in pairs(model:GetDescendants()) do
-            if descendant:IsA('BasePart') and descendant.Name ~= 'Primary' then
+            if descendant:IsA('BasePart') then
                 modelData.originalProperties[descendant] = {
                     Transparency = descendant.Transparency,
                     CanCollide = descendant.CanCollide,
@@ -179,7 +179,9 @@ local function ghostModels()
                     CanQuery = descendant.CanQuery,
                 }
 
-                descendant.Transparency = 0.9
+                if descendant.Name ~= 'Primary' then
+                    descendant.Transparency = 0.9
+                end
                 descendant.CanCollide = false
                 descendant.CanTouch = false
                 descendant.CanQuery = false
